@@ -59,6 +59,10 @@ except: print '0.0.0'"`
       else
         echo "-----> Creating/downloading $PACKAGE-$VERSION."
 
+        if [ ! -d $VENDORED_GIT_NAME ]; then
+           # If the git repo with the binaries has been removed, reclone it
+           git clone $VENDORED_GIT_REPO
+        fi
         cd $VENDORED_GIT_NAME
         NAME="$PACKAGE-$VERSION"
         git checkout HEAD $NAME.tar.gz
